@@ -38,6 +38,27 @@ export function AddLeadModal({ onClose, onSaved }: AddLeadModalProps) {
     onSaved();
   }
 
+  const labelStyle = {
+    fontSize: '11px',
+    color: 'var(--text-muted)',
+    fontWeight: 600 as const,
+    letterSpacing: '0.06em',
+    textTransform: 'uppercase' as const,
+    display: 'block',
+    marginBottom: '6px',
+  };
+
+  const inputBase = {
+    width: '100%',
+    padding: '9px 12px',
+    borderRadius: '8px',
+    background: 'var(--bg-secondary)',
+    color: 'var(--text-primary)',
+    fontSize: '13px',
+    boxSizing: 'border-box' as const,
+    outline: 'none',
+  };
+
   const field = (
     label: string,
     key: string,
@@ -45,36 +66,19 @@ export function AddLeadModal({ onClose, onSaved }: AddLeadModalProps) {
     placeholder = '',
   ) => (
     <div>
-      <label
-        style={{
-          fontSize: '12px',
-          color: 'var(--text-muted)',
-          fontWeight: 600,
-          letterSpacing: '0.05em',
-          display: 'block',
-          marginBottom: '6px',
-        }}
-      >
-        {label}
-      </label>
+      <label style={labelStyle}>{label}</label>
       <input
         type={type}
         value={(form as Record<string, string>)[key]}
         placeholder={placeholder}
         onChange={(e) => set(key, e.target.value)}
         style={{
-          width: '100%',
-          padding: '9px 12px',
-          borderRadius: '8px',
-          border: `1px solid ${errors[key] ? '#f87171' : 'var(--border)'}`,
-          background: 'var(--bg-secondary)',
-          color: 'var(--text-primary)',
-          fontSize: '14px',
-          boxSizing: 'border-box',
+          ...inputBase,
+          border: `1px solid ${errors[key] ? 'var(--red)' : 'var(--border)'}`,
         }}
       />
       {errors[key] && (
-        <p style={{ color: '#f87171', fontSize: '12px', marginTop: '4px' }}>
+        <p style={{ color: 'var(--red)', fontSize: '12px', marginTop: '4px' }}>
           {errors[key]}
         </p>
       )}
@@ -83,30 +87,14 @@ export function AddLeadModal({ onClose, onSaved }: AddLeadModalProps) {
 
   const select = (label: string, key: string, options: string[]) => (
     <div>
-      <label
-        style={{
-          fontSize: '12px',
-          color: 'var(--text-muted)',
-          fontWeight: 600,
-          letterSpacing: '0.05em',
-          display: 'block',
-          marginBottom: '6px',
-        }}
-      >
-        {label}
-      </label>
+      <label style={labelStyle}>{label}</label>
       <select
         value={(form as Record<string, string>)[key]}
         onChange={(e) => set(key, e.target.value)}
         style={{
-          width: '100%',
-          padding: '9px 12px',
-          borderRadius: '8px',
+          ...inputBase,
           border: '1px solid var(--border)',
-          background: 'var(--bg-secondary)',
-          color: 'var(--text-primary)',
-          fontSize: '14px',
-          boxSizing: 'border-box',
+          cursor: 'pointer',
         }}
       >
         {options.map((o) => (
@@ -124,7 +112,8 @@ export function AddLeadModal({ onClose, onSaved }: AddLeadModalProps) {
         position: 'fixed',
         inset: 0,
         zIndex: 200,
-        background: 'rgba(0,0,0,0.6)',
+        background: 'rgba(26,74,46,0.35)',
+        backdropFilter: 'blur(4px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -141,6 +130,7 @@ export function AddLeadModal({ onClose, onSaved }: AddLeadModalProps) {
           maxWidth: '540px',
           maxHeight: '90vh',
           overflowY: 'auto',
+          boxShadow: '0 20px 60px rgba(26,74,46,0.1)',
         }}
       >
         <div
@@ -156,6 +146,7 @@ export function AddLeadModal({ onClose, onSaved }: AddLeadModalProps) {
               fontFamily: 'var(--font-display)',
               fontSize: '1.2rem',
               fontWeight: 700,
+              color: 'var(--text-primary)',
             }}
           >
             Add New Lead
@@ -222,38 +213,21 @@ export function AddLeadModal({ onClose, onSaved }: AddLeadModalProps) {
             {select('Priority', 'priority', ['low', 'medium', 'high'])}
           </div>
           <div>
-            <label
-              style={{
-                fontSize: '12px',
-                color: 'var(--text-muted)',
-                fontWeight: 600,
-                letterSpacing: '0.05em',
-                display: 'block',
-                marginBottom: '6px',
-              }}
-            >
-              Notes
-            </label>
+            <label style={labelStyle}>Notes</label>
             <textarea
               value={form.notes}
               onChange={(e) => set('notes', e.target.value)}
               rows={3}
               placeholder='Any additional notes…'
               style={{
-                width: '100%',
-                padding: '9px 12px',
-                borderRadius: '8px',
+                ...inputBase,
                 border: '1px solid var(--border)',
-                background: 'var(--bg-secondary)',
-                color: 'var(--text-primary)',
-                fontSize: '14px',
                 resize: 'vertical',
-                boxSizing: 'border-box',
               }}
             />
           </div>
           {errors._ && (
-            <p style={{ color: '#f87171', fontSize: '13px' }}>{errors._}</p>
+            <p style={{ color: 'var(--red)', fontSize: '13px' }}>{errors._}</p>
           )}
         </div>
 
@@ -271,10 +245,10 @@ export function AddLeadModal({ onClose, onSaved }: AddLeadModalProps) {
               padding: '9px 20px',
               borderRadius: '8px',
               border: '1px solid var(--border)',
-              background: 'none',
+              background: 'var(--bg-3)',
               color: 'var(--text-secondary)',
               cursor: 'pointer',
-              fontSize: '14px',
+              fontSize: '13px',
             }}
           >
             Cancel
@@ -289,7 +263,7 @@ export function AddLeadModal({ onClose, onSaved }: AddLeadModalProps) {
               background: 'var(--accent-blue)',
               color: 'white',
               cursor: saving ? 'not-allowed' : 'pointer',
-              fontSize: '14px',
+              fontSize: '13px',
               fontWeight: 600,
               opacity: saving ? 0.7 : 1,
             }}

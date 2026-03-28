@@ -1,30 +1,72 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Geist+Mono:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 :root {
-  --bg:           #06080f;
-  --bg-2:         #0b0f1a;
-  --bg-3:         #111827;
-  --bg-4:         #1a2235;
-  --blue:         #2563eb;
-  --blue-light:   #60a5fa;
-  --blue-dim:     rgba(37,99,235,0.15);
-  --blue-border:  rgba(37,99,235,0.35);
-  --green:        #10b981;
-  --amber:        #f59e0b;
-  --red:          #ef4444;
-  --text:         #e8edf8;
-  --text-2:       #7b8db8;
-  --text-3:       #3d4f73;
-  --border:       rgba(255,255,255,0.06);
-  --border-2:     rgba(255,255,255,0.10);
-  --font-head:    'Syne', sans-serif;
-  --font-mono:    'Geist Mono', monospace;
-  --radius:       12px;
+  /* ── Backgrounds ── */
+  --bg: #f4f7f4;
+  --bg-2: #ffffff;
+  --bg-3: #edf3ed;
+  --bg-4: #dceadc;
+  --bg-secondary: #edf3ed;
+  --bg-card: #ffffff;
+
+  /* ── Brand colours ── */
+  --green-dark: #1a4a2e;
+  --green: #2d7a4f;
+  --green-mid: #3a9460;
+  --green-light: #5db87e;
+  --green-dim: rgba(45, 122, 79, 0.1);
+  --green-border: rgba(45, 122, 79, 0.25);
+
+  /* ── Semantic aliases ── */
+  --accent-blue: #2d7a4f;
+  --blue: #1a4a2e;
+  --blue-light: #5db87e;
+  --blue-dim: rgba(45, 122, 79, 0.1);
+  --blue-border: rgba(45, 122, 79, 0.25);
+  --navy: #1a4a2e;
+  --navy-light: #3a9460;
+  --navy-dim: rgba(45, 122, 79, 0.1);
+  --navy-border: rgba(45, 122, 79, 0.25);
+  --gold: #3a9460;
+  --gold-light: #5db87e;
+  --gold-dim: rgba(45, 122, 79, 0.1);
+  --gold-border: rgba(45, 122, 79, 0.25);
+
+  /* ── Status ── */
+  --amber: #c47c1a;
+  --red: #c0392b;
+
+  /* ── Text ── */
+  --text: #1a3a24;
+  --text-primary: #1a3a24;
+  --text-secondary: #4a7060;
+  --text-muted: #7a9e8a;
+  --text-2: #4a7060;
+  --text-3: #96b8a4;
+
+  /* ── Borders ── */
+  --border: rgba(26, 74, 46, 0.15);
+  --border-2: rgba(26, 74, 46, 0.25);
+
+  /* ── Typography ── */
+  --font-head: 'Playfair Display', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-mono: 'DM Sans', sans-serif;
+
+  --radius: 12px;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--bg);
@@ -35,24 +77,59 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-::selection { background: var(--blue); color: #fff; }
-
-::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: var(--bg-2); }
-::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 2px; }
-
-input, textarea, select, button { font-family: inherit; }
-
-a { text-decoration: none; color: inherit; }
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+::selection {
+  background: var(--green);
+  color: #fff;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-3);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--green);
+  border-radius: 2px;
+}
 
-.fu  { animation: fadeUp .3s ease both; }
-.fu1 { animation: fadeUp .3s .05s ease both; }
-.fu2 { animation: fadeUp .3s .10s ease both; }
-.fu3 { animation: fadeUp .3s .15s ease both; }
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fu {
+  animation: fadeUp 0.3s ease both;
+}
+.fu1 {
+  animation: fadeUp 0.3s 0.05s ease both;
+}
+.fu2 {
+  animation: fadeUp 0.3s 0.1s ease both;
+}
+.fu3 {
+  animation: fadeUp 0.3s 0.15s ease both;
+}

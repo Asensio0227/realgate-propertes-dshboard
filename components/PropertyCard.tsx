@@ -11,8 +11,8 @@ interface Props {
 }
 
 const TYPE_COLOR: Record<string, [string, string]> = {
-  sale: ['rgba(16,185,129,.15)', '#34d399'],
-  rent: ['rgba(245,158,11,.15)', '#fbbf24'],
+  sale: ['rgba(45,122,79,0.12)', 'var(--green)'],
+  rent: ['rgba(196,124,26,0.12)', 'var(--amber)'],
 };
 
 export default function PropertyCard({
@@ -22,30 +22,32 @@ export default function PropertyCard({
   onToggle,
   isAdmin,
 }: Props) {
-  const [tbg, tc] = TYPE_COLOR[p.type] ?? ['rgba(255,255,255,.06)', '#7b8db8'];
+  const [tbg, tc] = TYPE_COLOR[p.type] ?? ['var(--bg-3)', 'var(--text-muted)'];
   const cover = p.images?.[0];
 
   return (
     <div
       style={{
-        background: '#111827',
-        border: '1px solid rgba(255,255,255,0.06)',
+        background: 'var(--bg-2)',
+        border: '1px solid var(--border)',
         borderRadius: '12px',
         overflow: 'hidden',
-        transition: 'border-color .15s',
+        transition: 'border-color .15s, box-shadow .15s',
       }}
-      onMouseEnter={(e) =>
-        (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)')
-      }
-      onMouseLeave={(e) =>
-        (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)')
-      }
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = 'var(--green-border)';
+        e.currentTarget.style.boxShadow = '0 4px 20px rgba(45,122,79,0.08)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = 'var(--border)';
+        e.currentTarget.style.boxShadow = 'none';
+      }}
     >
-      {/* ── Cover image ── */}
+      {/* Cover image */}
       <div
         style={{
           height: '160px',
-          background: '#0b0f1a',
+          background: 'var(--bg-3)',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -68,7 +70,7 @@ export default function PropertyCard({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#1e2d45',
+              color: 'var(--border-2)',
               fontSize: '3rem',
             }}
           >
@@ -86,7 +88,7 @@ export default function PropertyCard({
             padding: '2px 9px',
             borderRadius: '100px',
             fontSize: '11px',
-            fontWeight: 500,
+            fontWeight: 600,
             textTransform: 'capitalize',
             backdropFilter: 'blur(8px)',
           }}
@@ -100,8 +102,8 @@ export default function PropertyCard({
             top: '10px',
             right: '10px',
             background: p.available
-              ? 'rgba(16,185,129,.75)'
-              : 'rgba(239,68,68,.75)',
+              ? 'rgba(45,122,79,0.8)'
+              : 'rgba(192,57,43,0.8)',
             color: '#fff',
             padding: '2px 9px',
             borderRadius: '100px',
@@ -119,8 +121,8 @@ export default function PropertyCard({
               position: 'absolute',
               bottom: '8px',
               right: '8px',
-              background: 'rgba(0,0,0,0.65)',
-              color: '#e8edf8',
+              background: 'rgba(26,74,46,0.65)',
+              color: '#fff',
               padding: '2px 8px',
               borderRadius: '6px',
               fontSize: '10px',
@@ -132,22 +134,29 @@ export default function PropertyCard({
         )}
       </div>
 
-      {/* ── Body ── */}
+      {/* Body */}
       <div style={{ padding: '14px 16px' }}>
         <h3
           style={{
-            fontFamily: 'Syne, sans-serif',
+            fontFamily: 'var(--font-display)',
             fontSize: '14px',
             fontWeight: 600,
             marginBottom: '4px',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
+            color: 'var(--text-primary)',
           }}
         >
           {p.title}
         </h3>
-        <p style={{ fontSize: '12px', color: '#7b8db8', marginBottom: '10px' }}>
+        <p
+          style={{
+            fontSize: '12px',
+            color: 'var(--text-muted)',
+            marginBottom: '10px',
+          }}
+        >
           📍 {p.location}
         </p>
 
@@ -156,14 +165,14 @@ export default function PropertyCard({
             display: 'flex',
             gap: '10px',
             fontSize: '12px',
-            color: '#3d4f73',
+            color: 'var(--text-secondary)',
             marginBottom: '12px',
           }}
         >
           <span
             style={{
               textTransform: 'capitalize',
-              background: 'rgba(255,255,255,.04)',
+              background: 'var(--bg-3)',
               padding: '2px 8px',
               borderRadius: '6px',
             }}
@@ -177,10 +186,10 @@ export default function PropertyCard({
         {p.price != null && (
           <div
             style={{
-              fontFamily: 'Syne, sans-serif',
+              fontFamily: 'var(--font-display)',
               fontSize: '16px',
               fontWeight: 700,
-              color: '#60a5fa',
+              color: 'var(--green)',
               marginBottom: '12px',
             }}
           >
@@ -193,9 +202,9 @@ export default function PropertyCard({
             onClick={() => onToggle(p._id, !p.available)}
             style={{
               flex: 1,
-              background: 'rgba(245,158,11,.08)',
-              border: '1px solid rgba(245,158,11,.2)',
-              color: '#fbbf24',
+              background: 'rgba(196,124,26,0.08)',
+              border: '1px solid rgba(196,124,26,0.2)',
+              color: 'var(--amber)',
               padding: '7px 0',
               borderRadius: '7px',
               cursor: 'pointer',
@@ -209,14 +218,15 @@ export default function PropertyCard({
           <button
             onClick={() => onEdit(p)}
             style={{
-              background: 'rgba(37,99,235,.1)',
-              border: 'none',
-              color: '#60a5fa',
+              background: 'var(--green-dim)',
+              border: '1px solid var(--green-border)',
+              color: 'var(--green)',
               padding: '7px 12px',
               borderRadius: '7px',
               cursor: 'pointer',
               fontSize: '11px',
               fontFamily: 'inherit',
+              fontWeight: 500,
             }}
           >
             Edit
@@ -225,9 +235,9 @@ export default function PropertyCard({
             <button
               onClick={() => onDelete(p._id)}
               style={{
-                background: 'rgba(239,68,68,.1)',
+                background: 'rgba(192,57,43,0.08)',
                 border: 'none',
-                color: '#fca5a5',
+                color: 'var(--red)',
                 padding: '7px 12px',
                 borderRadius: '7px',
                 cursor: 'pointer',

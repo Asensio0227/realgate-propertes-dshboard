@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Realgate — Dashboard',
+  title: 'Realgate Properties — Portal',
   description: 'Realgate Properties management portal',
 };
 
@@ -21,7 +21,7 @@ export default function RootLayout({
           crossOrigin='anonymous'
         />
         <link
-          href='https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Geist+Mono:wght@300;400;500&display=swap'
+          href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap'
           rel='stylesheet'
         />
       </head>

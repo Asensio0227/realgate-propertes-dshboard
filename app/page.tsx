@@ -84,30 +84,11 @@ export default function HomePage() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: '8px',
-              background: 'var(--accent-blue)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 700,
-              fontSize: '14px',
-            }}
-          >
-            RG
-          </div>
-          <span
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontWeight: 600,
-              fontSize: '18px',
-            }}
-          >
-            Realgate
-          </span>
+          <img
+            src='/assets/logo-transparent.png'
+            alt='Realgate Properties'
+            style={{ height: '44px', width: 'auto', objectFit: 'contain' }}
+          />
         </div>
 
         <div style={{ display: 'flex', gap: '2rem' }}>
@@ -760,9 +741,11 @@ export default function HomePage() {
             alignItems: 'center',
           }}
         >
-          <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}>
-            Realgate Properties
-          </span>
+          <img
+            src='/assets/logo.ico'
+            alt='Realgate Properties'
+            style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
+          />
           <span style={{ color: 'var(--text-muted)', fontSize: '13px' }}>
             © 2025 Realgate Properties, Bulawayo Zimbabwe
           </span>

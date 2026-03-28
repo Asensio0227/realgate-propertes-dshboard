@@ -7,7 +7,7 @@ const TITLES: Record<string, string> = {
   '/dashboard': 'Dashboard',
   '/properties': 'Properties',
   '/leads': 'Leads',
-  // '/sessions': 'Chatbot Sessions',
+  '/sessions': 'Chatbot Sessions',
 };
 
 export default function Navbar() {
@@ -22,8 +22,8 @@ export default function Navbar() {
     <header
       style={{
         height: '56px',
-        background: '#0b0f1a',
-        borderBottom: '1px solid rgba(255,255,255,0.06)',
+        background: 'var(--bg-2)',
+        borderBottom: '1px solid var(--border)',
         padding: '0 24px',
         display: 'flex',
         alignItems: 'center',
@@ -34,33 +34,38 @@ export default function Navbar() {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <span style={{ color: '#3d4f73', fontSize: '13px' }}>Realgate</span>
-        <span style={{ color: '#3d4f73' }}>/</span>
+        <span style={{ color: 'var(--text-muted)', fontSize: '13px' }}>
+          Realgate
+        </span>
+        <span style={{ color: 'var(--text-muted)' }}>/</span>
         <span
           style={{
-            fontFamily: 'Syne, sans-serif',
+            fontFamily: 'var(--font-display)',
             fontWeight: 600,
             fontSize: '14px',
+            color: 'var(--text-primary)',
           }}
         >
           {title}
         </span>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <span style={{ fontSize: '12px', color: '#7b8db8' }}>
+        <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
           {user?.email}
         </span>
         <span
           style={{
             background:
               user?.role === 'admin'
-                ? 'rgba(124,58,237,.15)'
-                : 'rgba(37,99,235,.15)',
-            color: user?.role === 'admin' ? '#a78bfa' : '#60a5fa',
+                ? 'rgba(26,74,46,0.12)'
+                : 'var(--green-dim)',
+            color:
+              user?.role === 'admin' ? 'var(--green-dark)' : 'var(--green)',
+            border: '1px solid var(--green-border)',
             padding: '2px 10px',
             borderRadius: '100px',
             fontSize: '11px',
-            fontWeight: 500,
+            fontWeight: 600,
             textTransform: 'capitalize',
           }}
         >

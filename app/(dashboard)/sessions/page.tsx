@@ -27,8 +27,8 @@ const PLATFORM_STYLE: Record<
   SessionPlatform,
   { bg: string; color: string; icon: string }
 > = {
-  whatsapp: { bg: 'rgba(34,197,94,0.12)', color: '#4ade80', icon: '💬' },
-  messenger: { bg: 'rgba(37,99,235,0.12)', color: '#60a5fa', icon: '📘' },
+  whatsapp: { bg: 'rgba(45,122,79,0.12)', color: '#2d7a4f', icon: '💬' },
+  messenger: { bg: 'rgba(26,74,46,0.12)', color: '#3a9460', icon: '📘' },
 };
 
 function timeAgo(dateStr: string): string {
@@ -59,7 +59,7 @@ function HistoryDrawer({
         position: 'fixed',
         inset: 0,
         zIndex: 200,
-        background: 'rgba(0,0,0,0.65)',
+        background: 'rgba(26,58,36,0.65)',
         backdropFilter: 'blur(4px)',
         display: 'flex',
         justifyContent: 'flex-end',
@@ -69,8 +69,8 @@ function HistoryDrawer({
         style={{
           width: '480px',
           height: '100%',
-          background: '#0b0f1a',
-          borderLeft: '1px solid rgba(255,255,255,0.08)',
+          background: 'var(--bg-2)',
+          borderLeft: '1px solid var(--border-2)',
           display: 'flex',
           flexDirection: 'column',
         }}
@@ -79,7 +79,7 @@ function HistoryDrawer({
         <div
           style={{
             padding: '18px 20px',
-            borderBottom: '1px solid rgba(255,255,255,0.06)',
+            borderBottom: '1px solid var(--border)',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -97,9 +97,10 @@ function HistoryDrawer({
               <span style={{ fontSize: '16px' }}>{ps.icon}</span>
               <span
                 style={{
-                  fontFamily: 'Syne, sans-serif',
+                  fontFamily: 'var(--font-head)',
                   fontWeight: 700,
                   fontSize: '14px',
+                  color: 'var(--text-primary)',
                 }}
               >
                 {session.senderId}
@@ -119,14 +120,14 @@ function HistoryDrawer({
               >
                 {session.platform}
               </span>
-              <span style={{ color: '#3d4f73', fontSize: '11px' }}>
+              <span style={{ color: 'var(--text-muted)', fontSize: '11px' }}>
                 {session.history.length} messages
               </span>
               {session.leadSaved && (
                 <span
                   style={{
-                    background: 'rgba(34,197,94,0.12)',
-                    color: '#4ade80',
+                    background: 'var(--green-dim)',
+                    color: 'var(--green)',
                     padding: '2px 8px',
                     borderRadius: '100px',
                     fontSize: '11px',
@@ -143,7 +144,7 @@ function HistoryDrawer({
             style={{
               background: 'none',
               border: 'none',
-              color: '#7b8db8',
+              color: 'var(--text-muted)',
               cursor: 'pointer',
               fontSize: '20px',
               lineHeight: 1,
@@ -167,7 +168,7 @@ function HistoryDrawer({
           {session.history.length === 0 ? (
             <p
               style={{
-                color: '#3d4f73',
+                color: 'var(--text-muted)',
                 fontSize: '13px',
                 textAlign: 'center',
                 marginTop: '2rem',
@@ -194,8 +195,10 @@ function HistoryDrawer({
                       borderRadius: '12px',
                       fontSize: '13px',
                       lineHeight: 1.6,
-                      background: m.role === 'user' ? '#2563eb' : '#111827',
-                      color: m.role === 'user' ? '#fff' : '#c8d4e8',
+                      background:
+                        m.role === 'user' ? 'var(--green)' : 'var(--bg-3)',
+                      color:
+                        m.role === 'user' ? '#fff' : 'var(--text-secondary)',
                       borderBottomRightRadius:
                         m.role === 'user' ? '4px' : '12px',
                       borderBottomLeftRadius:
@@ -215,8 +218,8 @@ function HistoryDrawer({
         <div
           style={{
             padding: '12px 20px',
-            borderTop: '1px solid rgba(255,255,255,0.06)',
-            color: '#3d4f73',
+            borderTop: '1px solid var(--border)',
+            color: 'var(--text-muted)',
             fontSize: '11px',
           }}
         >
@@ -288,9 +291,9 @@ export default function SessionsPage() {
   const selectStyle: React.CSSProperties = {
     padding: '8px 12px',
     borderRadius: '8px',
-    border: '1px solid rgba(255,255,255,0.08)',
-    background: '#111827',
-    color: '#7b8db8',
+    border: '1px solid var(--border)',
+    background: 'var(--bg-2)',
+    color: 'var(--text-secondary)',
     fontSize: '13px',
     cursor: 'pointer',
   };
@@ -307,7 +310,7 @@ export default function SessionsPage() {
       style={{
         padding: '2rem',
         minHeight: '100vh',
-        background: 'var(--bg-primary, #070b14)',
+        background: 'var(--bg)',
       }}
     >
       {/* Header */}
@@ -322,24 +325,25 @@ export default function SessionsPage() {
         <div>
           <h1
             style={{
-              fontFamily: 'Syne, sans-serif',
+              fontFamily: 'var(--font-head)',
               fontSize: '1.8rem',
               fontWeight: 700,
               marginBottom: '4px',
+              color: 'var(--text-primary)',
             }}
           >
             Chatbot Sessions
           </h1>
-          <p style={{ color: '#7b8db8', fontSize: '14px' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>
             WhatsApp &amp; Messenger conversations via Riya
           </p>
         </div>
         <button
           onClick={() => setTick((t) => t + 1)}
           style={{
-            background: 'rgba(37,99,235,0.1)',
-            border: '1px solid rgba(37,99,235,0.3)',
-            color: '#60a5fa',
+            background: 'var(--green-dim)',
+            border: '1px solid var(--green-border)',
+            color: 'var(--green)',
             padding: '8px 16px',
             borderRadius: '8px',
             cursor: 'pointer',
@@ -361,27 +365,39 @@ export default function SessionsPage() {
         }}
       >
         {[
-          { label: 'Total Sessions', value: counts.total, color: '#60a5fa' },
-          { label: 'WhatsApp', value: counts.whatsapp, color: '#4ade80' },
-          { label: 'Messenger', value: counts.messenger, color: '#60a5fa' },
+          {
+            label: 'Total Sessions',
+            value: counts.total,
+            color: 'var(--green)',
+          },
+          {
+            label: 'WhatsApp',
+            value: counts.whatsapp,
+            color: 'var(--green-mid)',
+          },
+          {
+            label: 'Messenger',
+            value: counts.messenger,
+            color: 'var(--green-dark)',
+          },
           {
             label: 'Leads Captured',
             value: counts.withLeads,
-            color: '#facc15',
+            color: 'var(--amber)',
           },
         ].map((c) => (
           <div
             key={c.label}
             style={{
-              background: '#111827',
-              border: '1px solid rgba(255,255,255,0.06)',
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border)',
               borderRadius: '12px',
               padding: '1.25rem',
             }}
           >
             <p
               style={{
-                color: '#7b8db8',
+                color: 'var(--text-muted)',
                 fontSize: '12px',
                 fontWeight: 600,
                 letterSpacing: '0.08em',
@@ -393,7 +409,7 @@ export default function SessionsPage() {
             </p>
             <p
               style={{
-                fontFamily: 'Syne, sans-serif',
+                fontFamily: 'var(--font-head)',
                 fontSize: '2rem',
                 fontWeight: 700,
                 color: c.color,
@@ -450,22 +466,26 @@ export default function SessionsPage() {
       {/* Table */}
       <div
         style={{
-          background: '#111827',
-          border: '1px solid rgba(255,255,255,0.06)',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border)',
           borderRadius: '16px',
           overflow: 'hidden',
         }}
       >
         {loading ? (
           <div
-            style={{ padding: '4rem', textAlign: 'center', color: '#7b8db8' }}
+            style={{
+              padding: '4rem',
+              textAlign: 'center',
+              color: 'var(--text-muted)',
+            }}
           >
             Loading sessions…
           </div>
         ) : sessions.length === 0 ? (
           <div style={{ padding: '4rem', textAlign: 'center' }}>
             <p style={{ fontSize: '2rem', marginBottom: '1rem' }}>💬</p>
-            <p style={{ color: '#7b8db8', fontSize: '14px' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
               No sessions found. Chatbot conversations will appear here.
             </p>
           </div>
@@ -475,8 +495,8 @@ export default function SessionsPage() {
               <thead>
                 <tr
                   style={{
-                    borderBottom: '1px solid rgba(255,255,255,0.06)',
-                    background: '#0b0f1a',
+                    borderBottom: '1px solid var(--border)',
+                    background: 'var(--bg-3)',
                   }}
                 >
                   {[
@@ -494,7 +514,7 @@ export default function SessionsPage() {
                         textAlign: 'left',
                         fontSize: '11px',
                         fontWeight: 600,
-                        color: '#7b8db8',
+                        color: 'var(--text-muted)',
                         letterSpacing: '0.08em',
                         textTransform: 'uppercase',
                         whiteSpace: 'nowrap',
@@ -512,7 +532,7 @@ export default function SessionsPage() {
                     <tr
                       key={s._id}
                       style={{
-                        borderBottom: '1px solid rgba(255,255,255,0.04)',
+                        borderBottom: '1px solid var(--border)',
                       }}
                     >
                       <td style={{ padding: '14px 16px' }}>
@@ -520,7 +540,8 @@ export default function SessionsPage() {
                           style={{
                             fontWeight: 600,
                             fontSize: '13px',
-                            fontFamily: 'Syne, sans-serif',
+                            fontFamily: 'var(--font-head)',
+                            color: 'var(--text-primary)',
                           }}
                         >
                           {s.senderId}
@@ -544,7 +565,7 @@ export default function SessionsPage() {
                       <td
                         style={{
                           padding: '14px 16px',
-                          color: '#7b8db8',
+                          color: 'var(--text-muted)',
                           fontSize: '13px',
                         }}
                       >
@@ -554,9 +575,11 @@ export default function SessionsPage() {
                         <span
                           style={{
                             background: s.leadSaved
-                              ? 'rgba(34,197,94,0.12)'
-                              : 'rgba(255,255,255,0.04)',
-                            color: s.leadSaved ? '#4ade80' : '#3d4f73',
+                              ? 'var(--green-dim)'
+                              : 'var(--bg-3)',
+                            color: s.leadSaved
+                              ? 'var(--green)'
+                              : 'var(--text-muted)',
                             padding: '3px 10px',
                             borderRadius: '100px',
                             fontSize: '11px',
@@ -569,7 +592,7 @@ export default function SessionsPage() {
                       <td
                         style={{
                           padding: '14px 16px',
-                          color: '#7b8db8',
+                          color: 'var(--text-muted)',
                           fontSize: '12px',
                         }}
                       >
@@ -580,9 +603,9 @@ export default function SessionsPage() {
                           <button
                             onClick={() => setSelected(s)}
                             style={{
-                              background: 'rgba(37,99,235,0.1)',
+                              background: 'var(--green-dim)',
                               border: 'none',
-                              color: '#60a5fa',
+                              color: 'var(--green)',
                               padding: '5px 12px',
                               borderRadius: '6px',
                               cursor: 'pointer',
@@ -594,9 +617,9 @@ export default function SessionsPage() {
                           <button
                             onClick={() => handleDelete(s._id)}
                             style={{
-                              background: 'rgba(239,68,68,0.1)',
+                              background: 'rgba(192,57,43,0.1)',
                               border: 'none',
-                              color: '#fca5a5',
+                              color: 'var(--red)',
                               padding: '5px 10px',
                               borderRadius: '6px',
                               cursor: 'pointer',

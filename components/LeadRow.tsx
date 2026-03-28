@@ -22,7 +22,15 @@ export function LeadRow({
   return (
     <tr style={{ borderBottom: '1px solid var(--border)' }}>
       <td style={{ padding: '14px 16px' }}>
-        <div style={{ fontWeight: 600, fontSize: '14px' }}>{lead.name}</div>
+        <div
+          style={{
+            fontWeight: 600,
+            fontSize: '14px',
+            color: 'var(--text-primary)',
+          }}
+        >
+          {lead.name}
+        </div>
         <div
           style={{
             color: 'var(--text-muted)',
@@ -66,9 +74,7 @@ export function LeadRow({
       <td style={{ padding: '14px 16px' }}>
         <Badge
           label={lead.source}
-          bg={
-            SOURCE_ICONS[lead.source] ? 'rgba(100,116,139,0.15)' : 'transparent'
-          }
+          bg={SOURCE_ICONS[lead.source] ? 'var(--bg-3)' : 'transparent'}
           color='var(--text-secondary)'
         />
         <span style={{ marginLeft: '4px', fontSize: '14px' }}>
@@ -123,9 +129,9 @@ export function LeadRow({
         <button
           onClick={() => onDelete(lead._id)}
           style={{
-            background: 'rgba(239,68,68,0.1)',
+            background: 'rgba(192,57,43,0.08)',
             border: 'none',
-            color: '#f87171',
+            color: 'var(--red)',
             borderRadius: '6px',
             padding: '5px 10px',
             cursor: 'pointer',

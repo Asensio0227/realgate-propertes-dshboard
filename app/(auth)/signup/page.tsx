@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-// ─── Component ────────────────────────────────────────────────────────────────
-
 export default function SignUpPage() {
   const router = useRouter();
   const setUser = useAuthStore((s) => s.setUser);
@@ -73,17 +71,16 @@ export default function SignUpPage() {
     }
   }
 
-  // ── Styles ─────────────────────────────────────────────────────────────────
-
   const iStyle: React.CSSProperties = {
     width: '100%',
     padding: '11px 14px',
-    background: 'var(--bg-3)',
+    background: 'var(--bg-2)',
     border: '1px solid var(--border-2)',
     borderRadius: '8px',
     color: 'var(--text)',
     fontSize: '14px',
     outline: 'none',
+    transition: 'border-color .2s',
   };
   const lStyle: React.CSSProperties = {
     display: 'block',
@@ -91,11 +88,11 @@ export default function SignUpPage() {
     fontWeight: 600,
     color: 'var(--text-2)',
     textTransform: 'uppercase',
-    letterSpacing: '.06em',
+    letterSpacing: '.07em',
     marginBottom: '5px',
   };
   const focus = (e: React.FocusEvent<HTMLInputElement>) =>
-    (e.target.style.borderColor = 'var(--blue)');
+    (e.target.style.borderColor = 'var(--green)');
   const blur = (e: React.FocusEvent<HTMLInputElement>) =>
     (e.target.style.borderColor = 'var(--border-2)');
 
@@ -103,13 +100,12 @@ export default function SignUpPage() {
     <div
       style={{ minHeight: '100vh', display: 'flex', background: 'var(--bg)' }}
     >
-      {/* ── Left panel ── */}
+      {/* ── Left brand panel ── */}
       <div
         style={{
           width: '400px',
           flexShrink: 0,
-          background: 'var(--bg-2)',
-          borderRight: '1px solid var(--border)',
+          background: 'var(--green-dark)',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
@@ -118,26 +114,27 @@ export default function SignUpPage() {
           overflow: 'hidden',
         }}
       >
+        {/* Diagonal texture */}
         <div
           style={{
             position: 'absolute',
             inset: 0,
             pointerEvents: 'none',
             backgroundImage:
-              'linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
+              'repeating-linear-gradient(135deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px)',
           }}
         />
+        {/* Green glow top-right */}
         <div
           style={{
             position: 'absolute',
-            top: '-60px',
-            right: '-60px',
-            width: '300px',
-            height: '300px',
+            top: '-80px',
+            right: '-80px',
+            width: '320px',
+            height: '320px',
             borderRadius: '50%',
             background:
-              'radial-gradient(circle, rgba(37,99,235,0.10) 0%, transparent 70%)',
+              'radial-gradient(circle, rgba(93,184,126,0.18) 0%, transparent 70%)',
             pointerEvents: 'none',
           }}
         />
@@ -149,38 +146,39 @@ export default function SignUpPage() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              color: 'var(--text-3)',
+              color: 'rgba(255,255,255,0.35)',
               fontSize: '12px',
-              marginBottom: '40px',
+              marginBottom: '32px',
               textDecoration: 'none',
+              transition: 'color .2s',
             }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.color = 'var(--green-light)')
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')
+            }
           >
             ← Back to sign in
           </Link>
-          <div
-            style={{
-              width: 42,
-              height: 42,
-              borderRadius: '10px',
-              background: 'var(--blue)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontFamily: 'var(--font-head)',
-              fontWeight: 800,
-              fontSize: '15px',
-              marginBottom: '24px',
-            }}
-          >
-            RG
+
+          {/* Logo image */}
+          <div style={{ marginBottom: '24px' }}>
+            <img
+              src='/assets/logo-transparent.png'
+              alt='Realgate Properties'
+              style={{ height: '56px', width: 'auto', objectFit: 'contain' }}
+            />
           </div>
+
           <h1
             style={{
               fontFamily: 'var(--font-head)',
-              fontSize: '24px',
-              fontWeight: 800,
-              lineHeight: 1.2,
+              fontSize: '26px',
+              fontWeight: 700,
+              lineHeight: 1.25,
               marginBottom: '10px',
+              color: '#ffffff',
             }}
           >
             Create your
@@ -189,13 +187,23 @@ export default function SignUpPage() {
           </h1>
           <p
             style={{
-              color: 'var(--text-2)',
+              color: 'rgba(255,255,255,0.5)',
               fontSize: '13px',
               lineHeight: 1.8,
             }}
           >
             Manage properties, leads &amp; agencies from one place.
           </p>
+
+          <div
+            style={{
+              width: '40px',
+              height: '2px',
+              background: 'var(--green-light)',
+              borderRadius: '2px',
+              marginTop: '28px',
+            }}
+          />
         </div>
 
         <div style={{ position: 'relative', zIndex: 1 }}>
@@ -211,14 +219,16 @@ export default function SignUpPage() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '12px',
-                padding: '10px 0',
-                borderBottom: '1px solid var(--border)',
+                padding: '11px 0',
+                borderBottom: '1px solid rgba(255,255,255,0.07)',
               }}
             >
-              <span style={{ color: 'var(--text-3)', fontSize: '15px' }}>
+              <span style={{ color: 'var(--green-light)', fontSize: '14px' }}>
                 {f.icon}
               </span>
-              <span style={{ color: 'var(--text-2)', fontSize: '13px' }}>
+              <span
+                style={{ color: 'rgba(255,255,255,0.6)', fontSize: '13px' }}
+              >
                 {f.label}
               </span>
             </div>
@@ -229,7 +239,7 @@ export default function SignUpPage() {
           style={{
             position: 'relative',
             zIndex: 1,
-            color: 'var(--text-3)',
+            color: 'rgba(255,255,255,0.25)',
             fontSize: '12px',
           }}
         >
@@ -245,15 +255,27 @@ export default function SignUpPage() {
           alignItems: 'center',
           justifyContent: 'center',
           padding: '2rem',
+          background: 'var(--bg)',
         }}
       >
         <div className='fu' style={{ width: '100%', maxWidth: '420px' }}>
+          <div
+            style={{
+              width: '40px',
+              height: '3px',
+              background: 'var(--green)',
+              borderRadius: '2px',
+              marginBottom: '24px',
+            }}
+          />
+
           <h2
             style={{
               fontFamily: 'var(--font-head)',
-              fontSize: '24px',
+              fontSize: '26px',
               fontWeight: 700,
               marginBottom: '6px',
+              color: 'var(--green-dark)',
             }}
           >
             Create account
@@ -271,11 +293,11 @@ export default function SignUpPage() {
           {error && (
             <div
               style={{
-                background: 'rgba(239,68,68,0.1)',
-                border: '1px solid rgba(239,68,68,0.3)',
+                background: 'rgba(192,57,43,0.08)',
+                border: '1px solid rgba(192,57,43,0.25)',
                 borderRadius: '8px',
                 padding: '10px 14px',
-                color: '#fca5a5',
+                color: 'var(--red)',
                 fontSize: '13px',
                 marginBottom: '20px',
               }}
@@ -318,7 +340,7 @@ export default function SignUpPage() {
               />
             </div>
 
-            {/* Agency — plain text input */}
+            {/* Agency */}
             <div>
               <label style={lStyle}>Agency *</label>
               <input
@@ -406,20 +428,29 @@ export default function SignUpPage() {
               type='submit'
               disabled={loading}
               style={{
-                background: 'var(--blue)',
+                background: 'var(--green-dark)',
                 color: '#fff',
                 border: 'none',
-                padding: '12px',
+                padding: '12px 16px',
                 borderRadius: '8px',
                 fontWeight: 600,
                 fontSize: '14px',
                 cursor: loading ? 'not-allowed' : 'pointer',
-                opacity: loading ? 0.6 : 1,
+                opacity: loading ? 0.7 : 1,
                 marginTop: '4px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '8px',
+                transition: 'background .2s',
+                letterSpacing: '0.03em',
+              }}
+              onMouseEnter={(e) => {
+                if (!loading) e.currentTarget.style.background = 'var(--green)';
+              }}
+              onMouseLeave={(e) => {
+                if (!loading)
+                  e.currentTarget.style.background = 'var(--green-dark)';
               }}
             >
               {loading && (
@@ -449,7 +480,7 @@ export default function SignUpPage() {
             Already have an account?{' '}
             <Link
               href='/signin'
-              style={{ color: 'var(--blue-light)', fontWeight: 500 }}
+              style={{ color: 'var(--green)', fontWeight: 600 }}
             >
               Sign in
             </Link>

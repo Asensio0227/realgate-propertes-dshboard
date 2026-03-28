@@ -8,7 +8,7 @@ const NAV = [
   { href: '/dashboard', label: 'Dashboard', icon: '◈' },
   { href: '/properties', label: 'Properties', icon: '⊞' },
   { href: '/leads', label: 'Leads', icon: '◎' },
-  // { href: '/sessions', label: 'Sessions', icon: '💬' },
+  { href: '/sessions', label: 'Sessions', icon: '💬' },
 ];
 
 export default function Sidebar() {
@@ -28,8 +28,8 @@ export default function Sidebar() {
         width: '220px',
         flexShrink: 0,
         height: '100vh',
-        background: '#0b0f1a',
-        borderRight: '1px solid rgba(255,255,255,0.06)',
+        background: 'var(--bg-2)',
+        borderRight: '1px solid var(--border)',
         display: 'flex',
         flexDirection: 'column',
         position: 'sticky',
@@ -40,37 +40,17 @@ export default function Sidebar() {
       <div
         style={{
           padding: '20px',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          borderBottom: '1px solid var(--border)',
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
         }}
       >
-        <div
-          style={{
-            width: 32,
-            height: 32,
-            borderRadius: '8px',
-            background: '#2563eb',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontWeight: 800,
-            fontSize: '13px',
-            fontFamily: 'Syne, sans-serif',
-          }}
-        >
-          RG
-        </div>
-        <span
-          style={{
-            fontFamily: 'Syne, sans-serif',
-            fontWeight: 700,
-            fontSize: '15px',
-          }}
-        >
-          Realgate
-        </span>
+        <img
+          src='/assets/logo-transparent.png'
+          alt='Realgate Properties'
+          style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
+        />
       </div>
 
       {/* Nav */}
@@ -87,9 +67,9 @@ export default function Sidebar() {
                 alignItems: 'center',
                 gap: '10px',
                 padding: '10px 20px',
-                borderLeft: `3px solid ${active ? '#2563eb' : 'transparent'}`,
-                background: active ? 'rgba(37,99,235,0.10)' : 'transparent',
-                color: active ? '#e8edf8' : '#7b8db8',
+                borderLeft: `3px solid ${active ? 'var(--green)' : 'transparent'}`,
+                background: active ? 'var(--green-dim)' : 'transparent',
+                color: active ? 'var(--text-primary)' : 'var(--text-muted)',
                 textDecoration: 'none',
                 fontSize: '13px',
                 fontWeight: active ? 600 : 400,
@@ -99,7 +79,7 @@ export default function Sidebar() {
               <span
                 style={{
                   fontSize: '15px',
-                  color: active ? '#60a5fa' : '#3d4f73',
+                  color: active ? 'var(--green)' : 'var(--text-muted)',
                 }}
               >
                 {n.icon}
@@ -112,10 +92,7 @@ export default function Sidebar() {
 
       {/* User + Logout */}
       <div
-        style={{
-          padding: '16px 20px',
-          borderTop: '1px solid rgba(255,255,255,0.06)',
-        }}
+        style={{ padding: '16px 20px', borderTop: '1px solid var(--border)' }}
       >
         <div
           style={{
@@ -130,13 +107,15 @@ export default function Sidebar() {
               width: 30,
               height: 30,
               borderRadius: '50%',
-              background: 'linear-gradient(135deg,#2563eb,#7c3aed)',
+              background:
+                'linear-gradient(135deg, var(--green), var(--green-mid))',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: '12px',
               fontWeight: 700,
               flexShrink: 0,
+              color: '#fff',
             }}
           >
             {user?.name?.[0]?.toUpperCase() ?? 'U'}
@@ -149,6 +128,7 @@ export default function Sidebar() {
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
+                color: 'var(--text-primary)',
               }}
             >
               {user?.name}
@@ -156,7 +136,7 @@ export default function Sidebar() {
             <div
               style={{
                 fontSize: '11px',
-                color: '#3d4f73',
+                color: 'var(--text-muted)',
                 textTransform: 'capitalize',
               }}
             >
@@ -168,9 +148,9 @@ export default function Sidebar() {
           onClick={logout}
           style={{
             width: '100%',
-            background: 'rgba(239,68,68,0.08)',
-            border: '1px solid rgba(239,68,68,0.2)',
-            color: '#fca5a5',
+            background: 'rgba(192,57,43,0.07)',
+            border: '1px solid rgba(192,57,43,0.2)',
+            color: 'var(--red)',
             padding: '8px',
             borderRadius: '8px',
             cursor: 'pointer',

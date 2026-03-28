@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 type Params = { params: Promise<{ id: string }> };
 
 // ─── Shared: resolve agency and ownership ─────────────────────────────────────
+
 async function resolveAgencyLead(authUserId: string, leadId: string) {
   const dbUser = await User.findById(authUserId).select('agency').lean();
   if (!dbUser?.agency)
@@ -19,6 +20,7 @@ async function resolveAgencyLead(authUserId: string, leadId: string) {
 }
 
 // ─── PATCH /api/leads/[id] ────────────────────────────────────────────────────
+
 export async function PATCH(req: NextRequest, { params }: Params) {
   try {
     const authUser = await getAuthUser();
@@ -41,9 +43,7 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     }
 
     const body = await req.json();
-
-    // Prevent agency from being overwritten
-    delete body.agency;
+    delete body.agency; // prevent agency from being overwritten
 
     const ALLOWED = [
       'status',
@@ -65,7 +65,7 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     const updated = await Lead.findByIdAndUpdate(
       id,
       { $set: update },
-      { new: true, runValidators: true },
+      { returnDocument: 'after', runValidators: true },
     );
     return NextResponse.json({ success: true, lead: updated });
   } catch (err) {
@@ -78,6 +78,7 @@ export async function PATCH(req: NextRequest, { params }: Params) {
 }
 
 // ─── DELETE /api/leads/[id] ───────────────────────────────────────────────────
+
 export async function DELETE(_req: NextRequest, { params }: Params) {
   try {
     const authUser = await getAuthUser();

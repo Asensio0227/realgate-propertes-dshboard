@@ -7,20 +7,22 @@ import { NextRequest, NextResponse } from 'next/server';
 type Params = { params: Promise<{ id: string }> };
 
 // ─── PUT /api/properties/[id] ─────────────────────────────────────────────────
+
 export async function PUT(req: NextRequest, { params }: Params) {
   try {
     const user = await getAuthUser();
-    if (!user)
+    if (!user) {
       return NextResponse.json(
         { success: false, message: 'Unauthorized' },
         { status: 401 },
       );
+    }
 
     await connectDB();
     const { id } = await params;
     const body = await req.json();
 
-    // Only run full validation when core fields are present (i.e. full save, not just a toggle)
+    // Only full-validate when core fields are present (not for availability toggles)
     if (body.title) {
       const errors = validateProperty(body);
       if (Object.keys(errors).length > 0) {
@@ -37,10 +39,13 @@ export async function PUT(req: NextRequest, { params }: Params) {
         : [];
     }
 
+    // Prevent agency from being changed via update
+    delete body.agency;
+
     const property = await Property.findByIdAndUpdate(
       id,
       { $set: body },
-      { new: true, runValidators: true },
+      { returnDocument: 'after', runValidators: true },
     );
 
     if (!property) {
@@ -61,14 +66,16 @@ export async function PUT(req: NextRequest, { params }: Params) {
 }
 
 // ─── DELETE /api/properties/[id] ──────────────────────────────────────────────
+
 export async function DELETE(_req: NextRequest, { params }: Params) {
   try {
     const user = await getAuthUser();
-    if (!user)
+    if (!user) {
       return NextResponse.json(
         { success: false, message: 'Unauthorized' },
         { status: 401 },
       );
+    }
     if (user.role !== 'admin') {
       return NextResponse.json(
         { success: false, message: 'Admin only' },

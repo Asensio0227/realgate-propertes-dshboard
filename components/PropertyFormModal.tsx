@@ -4,7 +4,6 @@ import ImageUploader from '@/components/ImageUploader';
 import { type PropertyData, type PropertyForm } from '@/types/property';
 import { useState } from 'react';
 
-// Re-export so any file that used to import from here still works
 export type { PropertyData, PropertyForm };
 
 interface Props {
@@ -19,8 +18,6 @@ interface WrapperProps extends Props {
   open: boolean;
   instanceKey: string;
 }
-
-// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 const BLANK: PropertyForm = {
   title: '',
@@ -50,15 +47,13 @@ function toForm(src: PropertyData): PropertyForm {
   };
 }
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
-
 const iStyle: React.CSSProperties = {
   width: '100%',
   padding: '9px 12px',
-  background: '#111827',
-  border: '1px solid rgba(255,255,255,0.1)',
+  background: 'var(--bg-3)',
+  border: '1px solid var(--border)',
   borderRadius: '8px',
-  color: '#e8edf8',
+  color: 'var(--text-primary)',
   fontSize: '13px',
   outline: 'none',
   fontFamily: 'inherit',
@@ -67,27 +62,23 @@ const iStyle: React.CSSProperties = {
 const lStyle: React.CSSProperties = {
   fontSize: '11px',
   fontWeight: 600,
-  color: '#7b8db8',
+  color: 'var(--text-muted)',
   textTransform: 'uppercase',
   letterSpacing: '.06em',
   display: 'block',
   marginBottom: '5px',
 };
 
-// ─── Inner form ───────────────────────────────────────────────────────────────
-
 function PropertyFormInner({ onClose, onSave, initial, saving, error }: Props) {
   const [form, setForm] = useState<PropertyForm>(() =>
     initial ? toForm(initial) : BLANK,
   );
-
   const set = (k: keyof PropertyForm, v: string | string[]) =>
     setForm((f) => ({ ...f, [k]: v }));
-
   const focus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    (e.target.style.borderColor = '#2563eb');
+    (e.target.style.borderColor = 'var(--green)');
   const blur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    (e.target.style.borderColor = 'rgba(255,255,255,0.1)');
+    (e.target.style.borderColor = 'var(--border)');
 
   return (
     <div
@@ -96,7 +87,7 @@ function PropertyFormInner({ onClose, onSave, initial, saving, error }: Props) {
         position: 'fixed',
         inset: 0,
         zIndex: 300,
-        background: 'rgba(0,0,0,0.85)',
+        background: 'rgba(26,74,46,0.4)',
         backdropFilter: 'blur(6px)',
         display: 'flex',
         alignItems: 'center',
@@ -106,33 +97,36 @@ function PropertyFormInner({ onClose, onSave, initial, saving, error }: Props) {
     >
       <div
         style={{
-          background: '#0b0f1a',
-          border: '1px solid rgba(255,255,255,0.1)',
+          background: 'var(--bg-2)',
+          border: '1px solid var(--border)',
           borderRadius: '16px',
           width: '100%',
           maxWidth: '580px',
           maxHeight: '92vh',
           overflowY: 'auto',
+          boxShadow: '0 24px 64px rgba(26,74,46,0.12)',
         }}
       >
+        {/* Header */}
         <div
           style={{
             padding: '18px 22px',
-            borderBottom: '1px solid rgba(255,255,255,0.06)',
+            borderBottom: '1px solid var(--border)',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             position: 'sticky',
             top: 0,
-            background: '#0b0f1a',
+            background: 'var(--bg-2)',
             zIndex: 1,
           }}
         >
           <span
             style={{
-              fontFamily: 'Syne, sans-serif',
+              fontFamily: 'var(--font-display)',
               fontWeight: 700,
               fontSize: '15px',
+              color: 'var(--text-primary)',
             }}
           >
             {initial ? 'Edit Property' : 'Add Property'}
@@ -142,7 +136,7 @@ function PropertyFormInner({ onClose, onSave, initial, saving, error }: Props) {
             style={{
               background: 'none',
               border: 'none',
-              color: '#7b8db8',
+              color: 'var(--text-muted)',
               cursor: 'pointer',
               fontSize: '18px',
             }}
@@ -162,11 +156,11 @@ function PropertyFormInner({ onClose, onSave, initial, saving, error }: Props) {
           {error && (
             <div
               style={{
-                background: 'rgba(239,68,68,.1)',
-                border: '1px solid rgba(239,68,68,.25)',
+                background: 'rgba(192,57,43,0.08)',
+                border: '1px solid rgba(192,57,43,0.2)',
                 borderRadius: '8px',
                 padding: '9px 13px',
-                color: '#fca5a5',
+                color: 'var(--red)',
                 fontSize: '13px',
               }}
             >
@@ -324,9 +318,9 @@ function PropertyFormInner({ onClose, onSave, initial, saving, error }: Props) {
             <button
               onClick={onClose}
               style={{
-                background: '#1a2235',
-                border: '1px solid rgba(255,255,255,0.1)',
-                color: '#7b8db8',
+                background: 'var(--bg-3)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-secondary)',
                 padding: '9px 18px',
                 borderRadius: '8px',
                 cursor: 'pointer',
@@ -340,7 +334,7 @@ function PropertyFormInner({ onClose, onSave, initial, saving, error }: Props) {
               onClick={() => onSave(form)}
               disabled={saving}
               style={{
-                background: '#2563eb',
+                background: 'var(--green)',
                 color: '#fff',
                 border: 'none',
                 padding: '9px 20px',
@@ -376,8 +370,6 @@ function PropertyFormInner({ onClose, onSave, initial, saving, error }: Props) {
     </div>
   );
 }
-
-// ─── Public wrapper ───────────────────────────────────────────────────────────
 
 export default function PropertyFormModal({
   open,
